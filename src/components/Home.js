@@ -72,23 +72,37 @@ const Home = () => {
   const renderMenu = () => (
     <>
       <div style={{ 
-        height: 64, 
+        height: 48, 
         display: 'flex', 
         alignItems: 'center', 
         justifyContent: 'center',
-        padding: '16px'
+        padding: '8px'
       }}>
         <Icon 
           icon="mdi:truck-delivery" 
-          width={collapsed ? "24" : "32"} 
-          height={collapsed ? "24" : "32"} 
+          width={collapsed ? "20" : "24"} 
+          height={collapsed ? "20" : "24"} 
           color="#1890ff" 
         />
         {!collapsed && (
-          <Title level={4} style={{ margin: 0, marginLeft: 8, color: '#fff' }}>
+          <Title level={5} style={{ margin: 0, marginLeft: 8, color: '#fff' }}>
             Sevkiyat
           </Title>
         )}
+      </div>
+      <div style={{ 
+        padding: '12px', 
+        borderBottom: '1px solid rgba(255, 255, 255, 0.1)',
+        marginBottom: '4px',
+        display: 'flex',
+        justifyContent: 'center'
+      }}>
+        <Space align="center" style={{ width: '100%', justifyContent: 'center' }}>
+          <Avatar size={collapsed ? 32 : 40} icon={<UserOutlined />} />
+          {!collapsed && (
+            <Text style={{ color: '#fff', fontSize: '14px' }}>{currentUser?.username}</Text>
+          )}
+        </Space>
       </div>
       <Menu
         theme="dark"
@@ -140,50 +154,51 @@ const Home = () => {
           alignItems: "center", 
           justifyContent: "space-between",
           background: isDarkMode ? "#1f1f1f" : "#fff",
-          padding: "0 24px",
-          boxShadow: "0 2px 8px rgba(0,0,0,0.1)",
+          padding: "0 16px",
+          boxShadow: "0 1px 4px rgba(0,0,0,0.1)",
           position: 'sticky',
           top: 0,
           zIndex: 999,
-          width: '100%'
+          width: '100%',
+          height: '48px'
         }}>
-          <Space>
+          <Space style={{ flex: 1, justifyContent: 'flex-start' }}>
             {isMobile ? (
               <Button
                 type="text"
                 icon={<MenuUnfoldOutlined />}
                 onClick={toggleDrawer}
-                style={{ fontSize: '16px', width: 64, height: 64 }}
+                style={{ fontSize: '16px', width: 48, height: 48 }}
               />
             ) : (
               <Button
                 type="text"
                 icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
                 onClick={() => setCollapsed(!collapsed)}
-                style={{ fontSize: '16px', width: 64, height: 64 }}
+                style={{ fontSize: '16px', width: 48, height: 48 }}
               />
             )}
             {!isMobile && (
-              <Title level={4} style={{ margin: 0 }}>
+              <Title level={5} style={{ margin: 0 }}>
                 Sevkiyat Yönetim Sistemi
               </Title>
             )}
           </Space>
-          <Space>
+          <Space size="middle" style={{ justifyContent: 'flex-end' }}>
             <Switch
               checked={isDarkMode}
               onChange={toggleTheme}
               checkedChildren={<BulbFilled />}
               unCheckedChildren={<BulbOutlined />}
+              size="small"
             />
-            <Avatar icon={<UserOutlined />} />
-            <Text strong>{currentUser?.username}</Text>
             <Button 
               type="text" 
               icon={<LogoutOutlined />} 
               onClick={logOut}
+              size="small"
             >
-              {!isMobile && "Çıkış Yap"}
+              {!isMobile && "Çıkış"}
             </Button>
           </Space>
         </Header>
